@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="news_fragment_label">News Fragment</string>
+    <string name="detail_fragment_label">Detail Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="news_hint">covid,football....</string>
+    <string name="news_search">search</string>
+</resources>
