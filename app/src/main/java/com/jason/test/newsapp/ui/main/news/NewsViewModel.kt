@@ -15,6 +15,8 @@ class NewsViewModel @Inject constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 //            private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+
     private val _uiState = MutableStateFlow<UIState>(UIState.Error(null))
     val uiState: StateFlow<UIState> = _uiState
 

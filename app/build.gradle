@@ -5,6 +5,38 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
+def getGitLatestTag() {
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe', '--abbrev=0'
+            standardOutput = stdout
+        }
+
+        return stdout.toString().trim()
+    } catch (ignored) {
+        return "v2.0.1"
+    }
+}
+
+private Integer generateVersionCode() {
+    // This creates version code is format <minsdkversion>0<major><minor><patch>
+    // For example for min sdk version 26 and version name 2.4.3: 230020403
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--abbrev=0'
+        standardOutput = stdout
+    }
+    // version tags in format v1.0.0
+    def tagArray = stdout.toString().trim().replaceAll("v", "").tokenize(".")
+    def versionMajor = tagArray.get(0).toInteger()
+    def versionMinor = tagArray.get(1).toInteger()
+    def versionPatch = tagArray.get(2).toInteger()
+    return (ext.minSdkVersion * 10000000) + (versionMajor * 10000) + (versionMinor * 100) + versionPatch
+}
+
+println "Running version " + getGitLatestTag() + " version code " + generateVersionCode()
+
 android {
     compileSdk 31
 
